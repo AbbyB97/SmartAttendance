@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="dbtindia.co.in.smartattendance.TakeAttendance">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/dash_tb"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        app:subtitleTextColor="@color/cardview_light_background"
+        app:title="TAKE ATTENDANCE"
+        app:titleTextColor="@color/cardview_light_background">
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dash_tb"
+        android:layout_centerHorizontal="true"
+        android:scrollbars="horizontal"
+        tools:listitem="@layout/row_take_attendance"/>
+
+    <dbtindia.co.in.smartattendance.UI.ProgressWheel
+        android:id="@+id/progressWheel"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:matProg_barWidth="8dp"
+        app:matProg_circleRadius="100dp"
+        app:matProg_barColor="@color/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

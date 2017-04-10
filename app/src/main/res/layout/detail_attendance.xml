@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dbtindia.co.in.smartattendance.DetailAttendance">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/dash_tb"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        app:title="ATTENDANCE DETAIL"
+        app:titleTextColor="@color/cardview_light_background"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/attendane_detail_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/dash_tb"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".DetailAttend"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/attendance_detail_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/row_detail_attendance"/>
+    </LinearLayout>
+
+    <dbtindia.co.in.smartattendance.UI.ProgressWheel
+        android:id="@+id/progressWheel"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:matProg_barColor="@color/colorAccent"
+        app:matProg_barWidth="8dp"
+        app:matProg_circleRadius="100dp"/>
+
+</RelativeLayout>

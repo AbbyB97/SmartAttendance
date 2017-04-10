@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dbtindia.co.in.smartattendance.SummeryInfo">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/stud_page_picview"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/dbt_rounded_logo"
+            />
+
+        <TextView
+            android:id="@+id/studpg_thesis_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <dbtindia.co.in.smartattendance.UI.PieChartView
+            android:id="@+id/pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="#eaeaea"
+            app:circleRadius="100dp"
+            app:textSize="13sp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
