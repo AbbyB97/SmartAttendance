@@ -11,7 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 
 import dbtindia.co.in.smartattendance.DataModels.Student;
 
@@ -28,43 +28,65 @@ public class Attendance {
 
     public boolean markAttendance(final String selectedUser, final String attendstat) {
         boolean markedstat = false;
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
-        final String month_name = month_date.format(cal.getTime());
+        Date date = new Date();
+        SimpleDateFormat f1 = new SimpleDateFormat("MMMM");
+        final String month_name = f1.format(date);
+
+        SimpleDateFormat f2 = new SimpleDateFormat("dd/yyyy");
+        final String strDate = f2.format(date);
 
         ParseQuery<Student> m = ParseQuery.getQuery(Student.class);
         m.getInBackground(selectedUser, new GetCallback<Student>() {
             @Override
-            public void done(Student mt, ParseException e) {
+            public void done(final Student mt, ParseException e) {
                 if (mt != null) {
-                    if (!mt.has(month_name)) {
-//                        if data has current month ,save todays attendance
-                        Log.i(TAG, "done: Object Not Has Month");
+                    JSONObject main = mt.getJSONObject("Stud_Attendance");
+                    JSONObject month = new JSONObject();
+
+                    if (main != null && main.has(month_name)) {
                         try {
-                            JSONObject jom = new JSONObject();
-                            JSONObject jomo = new JSONObject();
-                            jom.put(month_name + 1, attendstat);
-                            jomo.put(month_name, jom);
-                            mt.put("Stud_Attendance", jomo);
-                            mt.saveInBackground(new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    Log.i(TAG, "done: New Object Added");
-                                }
-                            });
+                            month = main.getJSONObject(month_name);
+                            month.put(strDate, attendstat);
+                            main.put(month_name, month);
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                        mt.put("Stud_Attendance", main);
+                        mt.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                Log.i(TAG, "done: New Entry Added");
+                            }
+                        });
+
+                        //add attendance entry to month obj of main attendance obj.
+
+                        Log.i(TAG, "Month Check : ");
+                    } else {
+                        //add new month obj;
+                        JSONObject newMonth = new JSONObject();
+                        try {
+                            newMonth.put(strDate, attendstat);
+                            main.put(month_name, newMonth);
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
 
-                    } else {
-//                        if data doesn,t have the running month then create new json object and ad to main object
-                        Log.i(TAG, "done: Object Has Month");
+                        mt.put("Stud_Attendance", main);
+                        mt.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                Log.i(TAG, "done: New Entry Added");
+                            }
+                        });
+
+                        Log.i(TAG, "Month Check !: ");
 
                     }
-                    Log.i(TAG, "done: Object Attendace Recieved");
+
+                    Log.i(TAG, "DATACHECK: data is present");
                 } else {
-                    Log.i(TAG, "done: Object Attendace Not Recieved");
-                    e.printStackTrace();
+
                 }
             }
         });

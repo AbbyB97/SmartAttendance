@@ -21,7 +21,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/stud_page_picview"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:src="@drawable/dbt_rounded_logo"

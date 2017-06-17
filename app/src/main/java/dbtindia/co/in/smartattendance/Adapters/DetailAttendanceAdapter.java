@@ -43,7 +43,7 @@ public class DetailAttendanceAdapter extends RecyclerView.Adapter<DetailAttendan
 
     @Override
     public void onBindViewHolder(final DetailViewHolder h, int position) {
-        Student s = studlist.get(position);
+        final Student s = studlist.get(position);
         //add data binding logic code
         if (s != null && s.getStudProfile().isDataAvailable()) {
             h.studname.setText(s.getStudFName() + " " + s.getStudLName());
@@ -61,6 +61,15 @@ public class DetailAttendanceAdapter extends RecyclerView.Adapter<DetailAttendan
             });
             Log.i(TAG, "onBindViewHolder: data retrived " + s.getStudFName() + " " + s.getStudLName());
         }
+        h.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(h.itemView.getContext(), SummeryInfo.class);
+                intent.putExtra("SuID", s.getObjectId());
+                h.itemView.getContext().startActivity(intent);
+                Log.i(TAG, "Data Send: = " + s.getObjectId());
+            }
+        });
 
 
     }
@@ -80,13 +89,6 @@ public class DetailAttendanceAdapter extends RecyclerView.Adapter<DetailAttendan
             detail = (TextView) itemView.findViewById(R.id.details);
             percent = (TextView) itemView.findViewById(R.id.percent_details);
             cv = (CircleImageView) itemView.findViewById(R.id.profile_view);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    ctx.startActivity(new Intent(ctx, SummeryInfo.class));
-                }
-            });
-
         }
     }
 }

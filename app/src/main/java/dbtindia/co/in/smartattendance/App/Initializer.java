@@ -34,7 +34,7 @@ public class Initializer extends Application {
                 .clientKey(getResources().getString(R.string.AndroidClientKey))
                 .server(getResources().getString(R.string.ServerAddress))
                 .build());
-
+//webpro server app
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.saveInBackground();
         Log.i(TAG, "Application---->>>>: Application Initialized");

@@ -28,8 +28,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SummeryAdapter extends RecyclerView.Adapter<SummeryAdapter.ThesisViwHolder> {
     List<Student> studlist;
     Context ctx;
-    Student selectedUser;
-        
+
+
     private String TAG = getClass().getSimpleName();
 
     public SummeryAdapter(List<Student> studlist, Context ctx) {
@@ -46,7 +46,7 @@ public class SummeryAdapter extends RecyclerView.Adapter<SummeryAdapter.ThesisVi
 
     @Override
     public void onBindViewHolder(final ThesisViwHolder h, int position) {
-        selectedUser = studlist.get(position);
+        final Student selectedUser = studlist.get(position);
         if (selectedUser != null && selectedUser.getStudProfile().isDataAvailable()) {
 //            ParseFile p= new ParseFile()
             h.studtv.setText(selectedUser.getStudFName() + " " + selectedUser.getStudLName());
@@ -63,6 +63,15 @@ public class SummeryAdapter extends RecyclerView.Adapter<SummeryAdapter.ThesisVi
             });
             Log.i(TAG, "onBindViewHolder: data retrived " + selectedUser.getStudFName() + " " + selectedUser.getStudLName());
         }
+        h.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(h.itemView.getContext(), SummeryInfo.class);
+                intent.putExtra("SuID", selectedUser.getObjectId());
+                h.itemView.getContext().startActivity(intent);
+                Log.i(TAG, "Data Send: = " + selectedUser.getObjectId());
+            }
+        });
         Log.i(TAG, "onBindViewHolder: Data Summery Activity");
     }
 
@@ -75,18 +84,13 @@ public class SummeryAdapter extends RecyclerView.Adapter<SummeryAdapter.ThesisVi
         CircleImageView tcv;
         TextView studtv, thesis;
 
-        public ThesisViwHolder(View itemView) {
+        public ThesisViwHolder(final View itemView) {
             super(itemView);
             studtv = (TextView) itemView.findViewById(R.id.thesis_stud_name);
             thesis = (TextView) itemView.findViewById(R.id.thesis_stud_thesis);
             tcv = (CircleImageView) itemView.findViewById(R.id.thesi_prof_cv);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//
-                }
-            });
 
         }
+
     }
 }

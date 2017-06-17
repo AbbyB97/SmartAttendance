@@ -1,7 +1,5 @@
 package dbtindia.co.in.smartattendance;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,28 +7,27 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.parse.GetCallback;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-
-import dbtindia.co.in.smartattendance.DataModels.Student;
 import dbtindia.co.in.smartattendance.UI.PieChartView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SummeryInfo extends AppCompatActivity implements View.OnClickListener {
 
-    String TAG = getClass().getSimpleName();
     protected CircleImageView studPagePicview;
     protected TextView studpgThesisTitle;
     protected PieChartView pieChart;
     protected LinearLayout main;
+    String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.summery_info);
         initView();
+        Bundle b = getIntent().getExtras();
+        if (!b.isEmpty()) {
+            String id = b.getString("SuID");
+            Log.i(TAG, "data get: = " + id);
+        }
 
     }
 
